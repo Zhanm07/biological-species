@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Био түрлер – Қазақстанның биологиялық дерекқоры</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef2f1;
+    color: #26352d;
+}
+
+header {
+    background: #246b45;
+    color: white;
+    padding: 30px 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 10px;
+}
+
+nav {
+    background: #194c32;
+    padding: 14px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 25px 15px;
+}
+
+.info {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.stat {
+    flex: 1;
+    min-width: 170px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 30px;
+    color: #246b45;
+    margin-bottom: 5px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+input, select {
+    padding: 12px;
+    border: 1px solid #b5c2ba;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.table-box {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1050px;
+}
+
+th {
+    background: #c5dce7;
+    color: #26352d;
+    padding: 13px 10px;
+    text-align: left;
+    border: 1px solid #a9bdc6;
+}
+
+td {
+    padding: 13px 10px;
+    border: 1px solid #d4dcd8;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background: #f0f3f2;
+}
+
+tr:hover {
+    background: #dcece2;
+}
+
+.latin {
+    font-style: italic;
+    color: #53645b;
+}
+
+.status {
+    color: #246b45;
+    font-weight: bold;
+}
+
+footer {
+    background: #194c32;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 35px;
+}
+
+@media(max-width: 600px) {
+    header h1 {
+        font-size: 23px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 6px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Қазақстанның биологиялық түрлері</h1>
+    <p>Өсімдіктер мен жануарлардың электронды дерекқоры</p>
+</header>
+
+<nav>
+    <a href="#about">Жоба туралы</a>
+    <a href="#statistics">Статистика</a>
+    <a href="#database">Дерекқор</a>
+</nav>
+
+<div class="container">
+
+<section id="about" class="info">
+    <h2>Жоба туралы</h2>
+    <p>
+        Бұл электронды дерекқор Қазақстан аумағында таралған
+        биологиялық түрлер туралы мәліметтерді сақтауға арналған.
+        Дерекқорда өсімдіктер мен жануарлардың қазақша және ғылыми
+        атаулары, биологиялық топтары, тіршілік орталары,
+        таралу аймақтары және қорғау мәртебелері берілген.
+    </p>
+</section>
+
+<section id="statistics">
+    <h2>Жалпы статистика</h2>
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong id="total">0</strong>
+            Барлық түрлер
+        </div>
+
+        <div class="stat">
+            <strong id="animals">0</strong>
+            Жануарлар
+        </div>
+
+        <div class="stat">
+            <strong id="plants">0</strong>
+            Өсімдіктер
+        </div>
+
+    </div>
+</section>
+
+<section id="database">
+
+    <h2>Биологиялық түрлер дерекқоры</h2>
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Түр атауын немесе ғылыми атауын іздеу..."
+        >
+
+        <select id="filter">
+            <option value="Барлығы">Барлық топтар</option>
+            <option value="Жануар">Жануарлар</option>
+            <option value="Өсімдік">Өсімдіктер</option>
+        </select>
+
+        <select id="statusFilter">
+            <option value="Барлығы">Барлық мәртебелер</option>
+            <option value="Қызыл кітапқа енгізілген">
+                Қызыл кітапқа енгізілген
+            </option>
+            <option value="Ерекше қорғауда">
+                Ерекше қорғауда
+            </option>
+            <option value="Қорғауға алынған">
+                Қорғауға алынған
+            </option>
+            <option value="Табиғи қорғауды қажет етеді">
+                Табиғи қорғауды қажет етеді
+            </option>
+        </select>
+
+    </div>
+
+    <div class="table-box">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Түр нөмірі</th>
+                    <th>Қазақша атауы</th>
+                    <th>Ғылыми атауы</th>
+                    <th>Биологиялық тобы</th>
+                    <th>Тіршілік ортасы</th>
+                    <th>Таралу аймағы</th>
+                    <th>Қорғау мәртебесі</th>
+                </tr>
+            </thead>
+
+            <tbody id="speciesTable"></tbody>
+
+        </table>
+
+        <p id="resultCount"></p>
+
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    <p>Биологиялық түрлердің электронды дерекқоры | 2026</p>
+</footer>
+
+<script>
+
+// 1. Биологиялық түрлер туралы мәліметтер
+
+const species = [
+
+{
+    id: 1,
+    name: "Ақбөкен",
+    latin: "Saiga tatarica",
+    type: "Жануар",
+    habitat: "Дала",
+    region: "Батыс және Орталық Қазақстан",
+    status: "Ерекше қорғауда"
+},
+
+{
+    id: 2,
+    name: "Қар барысы",
+    latin: "Panthera uncia",
+    type: "Жануар",
+    habitat: "Биік таулар",
+    region: "Алтай, Тянь-Шань",
+    status: "Қызыл кітапқа енгізілген"
+},
+
+{
+    id: 3,
+    name: "Арқар",
+    latin: "Ovis ammon",
+    type: "Жануар",
+    habitat: "Таулы аймақ",
+    region: "Қазақстанның таулы өңірлері",
+    status: "Қызыл кітапқа енгізілген"
+},
+
+{
+    id: 4,
+    name: "Қарақұйрық",
+    latin: "Gazella subgutturosa",
+    type: "Жануар",
+    habitat: "Шөл және шөлейт",
+    region: "Маңғыстау, Қызылқұм",
+    status: "Қызыл кітапқа енгізілген"
+},
+
+{
+    id: 5,
+    name: "Бүркіт",
+    latin: "Aquila chrysaetos",
+    type: "Жануар",
+    habitat: "Таулар, ашық далалар",
+    region: "Қазақстанның көптеген аймақтары",
+    status: "Қорғауға алынған"
+},
+
+{
+    id: 6,
+    name: "Қоқиқаз",
+    latin: "Phoenicopterus roseus",
+    type: "Жануар",
+    habitat: "Көлдер, сулы-батпақты жерлер",
+    region: "Қорғалжын, Теңіз көлдері",
+    status: "Қорғауға алынған"
+},
+
+{
+    id: 7,
+    name: "Грейг қызғалдағы",
+    latin: "Tulipa greigii",
+    type: "Өсімдік",
+    habitat: "Тау бөктері",
+    region: "Оңтүстік Қазақстан",
+    status: "Қызыл кітапқа енгізілген"
+},
+
+{
+    id: 8,
+    name: "Кауфман қызғалдағы",
+    latin: "Tulipa kaufmanniana",
+    type: "Өсімдік",
+    habitat: "Тау бөктері",
+    region: "Батыс Тянь-Шань",
+    status: "Қызыл кітапқа енгізілген"
+},
+
+{
+    id: 9,
+    name: "Шренк шыршасы",
+    latin: "Picea schrenkiana",
+    type: "Өсімдік",
+    habitat: "Таулы орман",
+    region: "Жетісу және Іле Алатауы",
+    status: "Табиғи қорғауды қажет етеді"
+},
+
+{
+    id: 10,
+    name: "Ақ сексеуіл",
+    latin: "Haloxylon persicum",
+    type: "Өсімдік",
+    habitat: "Құмды шөл",
+    region: "Қазақстанның шөлді аймақтары",
+    status: "Табиғи қорғауды қажет етеді"
+}
+
+];
+
+
+// 2. Жалпы статистиканы есептеу
+
+function calculateStatistics() {
+
+    document.getElementById("total").textContent =
+        species.length;
+
+    document.getElementById("animals").textContent =
+        species.filter(item =>
+            item.type === "Жануар"
+        ).length;
+
+    document.getElementById("plants").textContent =
+        species.filter(item =>
+            item.type === "Өсімдік"
+        ).length;
+}
+
+
+// 3. Кестеге мәліметтерді шығару
+
+function showSpecies() {
+
+    const searchText =
+        document.getElementById("search")
+        .value.toLowerCase().trim();
+
+    const selectedType =
+        document.getElementById("filter").value;
+
+    const selectedStatus =
+        document.getElementById("statusFilter").value;
+
+    const result = species.filter(item => {
+
+        const matchesSearch =
+            item.name.toLowerCase().includes(searchText) ||
+            item.latin.toLowerCase().includes(searchText) ||
+            item.region.toLowerCase().includes(searchText);
+
+        const matchesType =
+            selectedType === "Барлығы" ||
+            item.type === selectedType;
+
+        const matchesStatus =
+            selectedStatus === "Барлығы" ||
+            item.status === selectedStatus;
+
+        return matchesSearch && matchesType && matchesStatus;
+
+    });
+
+    const table =
+        document.getElementById("speciesTable");
+
+    table.innerHTML = "";
+
+    if (result.length === 0) {
+
+        table.innerHTML =
+            `<tr>
+                <td colspan="7" style="text-align:center">
+                    Мәлімет табылмады
+                </td>
+            </tr>`;
+
+    } else {
+
+        result.forEach(item => {
+
+            table.innerHTML += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td class="latin">${item.latin}</td>
+                    <td>${item.type}</td>
+                    <td>${item.habitat}</td>
+                    <td>${item.region}</td>
+                    <td class="status">${item.status}</td>
+                </tr>
+            `;
+
+        });
+
+    }
+
+    document.getElementById("resultCount").textContent =
+        "Көрсетілген түрлер саны: " + result.length;
+
+}
+
+
+// 4. Іздеу функциясы
+
+document.getElementById("search")
+.addEventListener("input", showSpecies);
+
+
+// 5. Биологиялық топ бойынша сүзгілеу
+
+document.getElementById("filter")
+.addEventListener("change", showSpecies);
+
+
+// 6. Қорғау мәртебесі бойынша сүзгілеу
+
+document.getElementById("statusFilter")
+.addEventListener("change", showSpecies);
+
+
+// 7. Бастапқы мәліметтерді шығару
+
+calculateStatistics();
+showSpecies();
+
+</script>
+
+</body>
+</html>
